@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/cardNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:ems="16"
+        android:hint="card Number"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/internationalBrand"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="international Brand"
+        app:layout_constraintEnd_toEndOf="@+id/cardNumber"
+        app:layout_constraintStart_toStartOf="@+id/cardNumber"
+        app:layout_constraintTop_toBottomOf="@+id/cardNumber" />
+
+    <EditText
+        android:id="@+id/dateOfExpiry"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="date Of Expiry"
+        app:layout_constraintEnd_toEndOf="@+id/internationalBrand"
+        app:layout_constraintStart_toStartOf="@+id/internationalBrand"
+        app:layout_constraintTop_toBottomOf="@+id/internationalBrand" />
+
+    <EditText
+        android:id="@+id/nameOfOwner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="name Of Owner"
+        app:layout_constraintEnd_toEndOf="@+id/dateOfExpiry"
+        app:layout_constraintStart_toStartOf="@+id/dateOfExpiry"
+        app:layout_constraintTop_toBottomOf="@+id/dateOfExpiry" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Save"
+        app:layout_constraintEnd_toEndOf="@+id/nameOfOwner"
+        app:layout_constraintTop_toBottomOf="@+id/nameOfOwner" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
