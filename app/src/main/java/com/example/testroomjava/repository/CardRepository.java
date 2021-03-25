@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.testroomjava.room.Card;
+import com.example.testroomjava.model.Card;
 import com.example.testroomjava.room.CardDao;
 import com.example.testroomjava.room.CardDatabase;
 
@@ -30,6 +30,11 @@ public class CardRepository {
         new UpdateCardAsyncTask(cardDao).execute(card);
     }
 
+
+    public void changeStatusSelected(int id) {
+        new ChangeStatusSelectedAsyncTask(cardDao).execute(id);
+    }
+
     public void deleteCard(Card card) {
         new DeleteCardAsyncTask(cardDao).execute(card);
 
@@ -39,8 +44,8 @@ public class CardRepository {
         new DeleteCardsAsyncTask(cardDao).execute(cards);
     }
 
-    public LiveData<Card> getCardById(int id) {
-        return cardDao.getCardById(id);
+    public LiveData<Card> getCardSelected() {
+        return cardDao.getCardSelected();
     }
 
     public LiveData<List<Card>> getAllCards() {
@@ -78,6 +83,20 @@ public class CardRepository {
         @Override
         protected Void doInBackground(Card... cards) {
             cardDao.updateCard(cards[0]);
+            return null;
+        }
+    }
+    private static class ChangeStatusSelectedAsyncTask extends AsyncTask<Integer, Void, Void> {
+
+        private CardDao cardDao;
+
+        private ChangeStatusSelectedAsyncTask(CardDao cardDao) {
+            this.cardDao = cardDao;
+        }
+
+        @Override
+        protected Void doInBackground(Integer... ints) {
+            cardDao.changeStatusSelected(ints[0]);
             return null;
         }
     }

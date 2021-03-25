@@ -5,10 +5,9 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.example.testroomjava.repository.CardRepository;
-import com.example.testroomjava.room.Card;
+import com.example.testroomjava.model.Card;
 
 import java.util.List;
 
@@ -16,13 +15,13 @@ public class CardViewModel extends AndroidViewModel {
 
     private CardRepository repository;
     private LiveData<List<Card>> cards;
-    private LiveData<Card> card;
+    private LiveData<Card> card ;
 
     public CardViewModel(@NonNull Application application) {
         super(application);
         repository = new CardRepository(application);
         cards = repository.getAllCards();
-        card = repository.getCardById(1);
+        card = repository.getCardSelected();
     }
 
 
@@ -51,12 +50,12 @@ public class CardViewModel extends AndroidViewModel {
         repository.deleteCards(cards);
     }
 
-    public LiveData<Card> getCardById() {
+    public LiveData<Card> getCard() {
         return card;
     }
 
-    public void getCardById(int id) {
-        card = repository.getCardById(id);
+    public void setCard(int id) {
+        repository.changeStatusSelected(id);
     }
 
 }

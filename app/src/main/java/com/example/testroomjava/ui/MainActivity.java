@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testroomjava.R;
-import com.example.testroomjava.room.Card;
+import com.example.testroomjava.model.Card;
 import com.example.testroomjava.ui.adapter.CardAdapter;
 import com.example.testroomjava.viewmodel.CardViewModel;
 
@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private CardViewModel viewModel;
     private RecyclerView recyclerView;
     private CardAdapter adapter;
+    private TextView tv_card_number, tv_name_of_owner, tv_date_of_expiry, tv_international_brand;
 
 
     @Override
@@ -31,6 +32,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recycler_view);
         findViewById(R.id.floating).setOnClickListener(this);
+
+        tv_card_number = findViewById(R.id.tv_card_number);
+        tv_name_of_owner = findViewById(R.id.tv_name_of_owner);
+        tv_date_of_expiry = findViewById(R.id.tv_date_of_expiry);
+        tv_international_brand = findViewById(R.id.tv_international_brand);
 
 
         viewModel = new ViewModelProvider(
@@ -43,11 +49,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             adapter = new CardAdapter(cards, this);
             recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
             recyclerView.setAdapter(adapter);
-//            Toast.makeText(this, "Total " + cards.size(), Toast.LENGTH_SHORT).show();
         });
 
-        viewModel.getCardById().observe(this, card -> {
-            Toast.makeText(this, card.getInternationalBrand(), Toast.LENGTH_SHORT).show();
+        viewModel.getCard().observe(this, card -> {
+            if (card != null) {
+                tv_card_number.setText(String.valueOf(card.getCardNumber()));
+                tv_name_of_owner.setText(card.getNameOfOwner());
+                tv_date_of_expiry.setText(card.getDateOfExpiry());
+                tv_international_brand.setText(card.getInternationalBrand());
+            }
         });
 
     }
@@ -76,11 +86,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         save.setOnClickListener(v -> {
             Toast.makeText(v.getContext(), cardNumber.getText().toString(), Toast.LENGTH_SHORT).show();
             viewModel.insertCard(new Card(
-                            Long.parseLong(cardNumber.getText().toString()),
-                            internationalBrand.getText().toString(),
-                            dateOfExpiry.getText().toString(),
-                            nameOfOwner.getText().toString()
-                    )
+                    Long.parseLong(cardNumber.getText().toString()),
+                    internationalBrand.getText().toString(),
+                    dateOfExpiry.getText().toString(),
+                    nameOfOwner.getText().toString())
             );
             dialog.dismiss();
         });
@@ -91,6 +100,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClickItem(int id) {
-        viewModel.getCardById(id);
+        viewModel.setCard(id);
     }
 }

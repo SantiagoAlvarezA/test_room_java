@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testroomjava.R;
-import com.example.testroomjava.room.Card;
+import com.example.testroomjava.model.Card;
 
 import java.util.List;
 
