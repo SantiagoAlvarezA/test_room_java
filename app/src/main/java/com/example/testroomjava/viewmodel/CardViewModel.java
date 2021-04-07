@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.testroomjava.repository.CardRepository;
 import com.example.testroomjava.model.Card;
@@ -15,15 +16,24 @@ public class CardViewModel extends AndroidViewModel {
 
     private CardRepository repository;
     private LiveData<List<Card>> cards;
-    private LiveData<Card> card ;
+    private LiveData<Card> card;
+    private MutableLiveData<byte[]> blob;
 
     public CardViewModel(@NonNull Application application) {
         super(application);
         repository = new CardRepository(application);
         cards = repository.getAllCards();
         card = repository.getCardSelected();
+        blob = new MutableLiveData<>();
     }
 
+    public void setBlob(byte[] blob) {
+        this.blob.setValue(blob);
+    }
+
+    public LiveData<byte[]> getBlob() {
+        return blob;
+    }
 
     public LiveData<List<Card>> getCards() {
         return cards;

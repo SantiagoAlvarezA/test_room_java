@@ -56,9 +56,9 @@ public abstract class CardDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            cardDao.insertCard(new Card(1000200030004000L, "VISA", "12/31", "SANTIAGO ALVAREZ A."));
-            cardDao.insertCard(new Card(1001200030004000L, "MASTERCARD", "10/31", "SANTIAGO ALVAREZ A."));
-            cardDao.insertCard(new Card(1002200030004000L, "BBVA", "09/31", "SANTIAGO ALVAREZ A."));
+//            cardDao.insertCard(new Card(1000200030004000L, "VISA", "12/31", "SANTIAGO ALVAREZ A.", blob));
+//            cardDao.insertCard(new Card(1001200030004000L, "MASTERCARD", "10/31", "SANTIAGO ALVAREZ A.", blob));
+//            cardDao.insertCard(new Card(1002200030004000L, "BBVA", "09/31", "SANTIAGO ALVAREZ A.", blob));
             return null;
         }
     }
